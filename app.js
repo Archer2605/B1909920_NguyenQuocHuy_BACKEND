@@ -10,6 +10,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (rep, res) => {
+    res.json({ message: "Welcome to contact book application." });
+});
+
+
 app.use("/api/contacts", contactsRouter);
 
 // handle 404 response
@@ -27,10 +32,6 @@ app.use((err, req, res, next) => {
     return res.status(err.statusCode || 500).json({
         message: err.message || "Internal Server Error",
     });
-});
-
-app.get("/", (rep, res) => {
-    res.json({ message: "Welcome to contact book application." });
 });
 
 module.exports = app;
